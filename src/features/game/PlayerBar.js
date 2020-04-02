@@ -1,39 +1,17 @@
 import React from 'react';
-import { changeResourceAmount } from './actions';
-import { useDispatch } from 'react-redux';
+import Resource from './Resource';
 
-const PlayerBar = player => {
-  const { id, color, ore, wheat, brick, wood, sheep } = player.player
-  const dispatch = useDispatch();
-
+const PlayerBar = ({ player: {
+  id, color, ore, wheat, brick, wood, sheep
+} }) => {
   return (
     <div style={{backgroundColor: color}}>
       <h3>{id}</h3>
-      <p>
-        Pedra: {ore}
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'ore', amount: 1}))}>+1</button>
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'ore', amount: -1}))}>-1</button>
-      </p>
-      <p>
-        Palla: {wheat}
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'wheat', amount: 1}))}>+1</button>
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'wheat', amount: -1}))}>-1</button>
-      </p>
-      <p>
-        Argila: {brick}
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'brick', amount: 1}))}>+1</button>
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'brick', amount: -1}))}>-1</button>
-      </p>
-      <p>
-        Fusta: {wood}
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'wood', amount: 1}))}>+1</button>
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'wood', amount: -1}))}>-1</button>
-      </p>
-      <p>
-        Xai: {sheep}
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'sheep', amount: 1}))}>+1</button>
-        <button onClick={() => dispatch(changeResourceAmount({ playerId: id, resource: 'sheep', amount: -1}))}>-1</button>
-      </p>
+      <Resource key={'ore'} playerId={id} label={'Pedra'} resource={'ore'} amount={ore} />
+      <Resource key={'wheat'} playerId={id} label={'Palla'} resource={'wheat'} amount={wheat} />
+      <Resource key={'wood'} playerId={id} label={'Fusta'} resource={'wood'} amount={wood} />
+      <Resource key={'brick'} playerId={id} label={'Argila'} resource={'brick'} amount={brick} />
+      <Resource key={'sheep'} playerId={id} label={'Xai'} resource={'sheep'} amount={sheep} />      
     </div>
   );
 }
